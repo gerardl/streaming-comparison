@@ -5,7 +5,15 @@ using System.Threading.Tasks;
 
 namespace StreamingTvComparison.Data
 {
-    public class DbInitializer
+    public static class DbInitializer
     {
+        public static void Seed(ApplicationDbContext context)
+        {
+            if (!context.Channel.Any())
+            {
+                context.Channel.Add(new Models.Channel { Name = "I'm Here", IsActive = true });
+                context.SaveChanges();
+            }
+        }
     }
 }
