@@ -26,7 +26,7 @@ namespace StreamingTvComparison.Data
         public async Task<List<Provider>> GetProviders()
         {
             return await _context.Provider
-                            .Include(i => i.Channels)
+                            .Include(i => i.ProviderChannels)
                             .Where(w => w.IsActive)
                             .ToListAsync();
         }

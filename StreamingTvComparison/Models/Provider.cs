@@ -17,6 +17,6 @@ namespace StreamingTvComparison.Models
         [Column(TypeName = "decimal(5,2)")]
         public decimal Price { get; set; }
         public bool IsActive { get; set; }
-        public List<Channel> Channels { get; set; }
+        public List<ProviderChannel> ProviderChannels { get; set; }
     }
 }

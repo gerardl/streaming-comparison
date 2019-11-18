@@ -16,6 +16,7 @@ namespace StreamingTvComparison.Data
 
         public DbSet<Channel> Channel { get; set; }
         public DbSet<Provider> Provider { get; set; }
+        public DbSet<ProviderChannel> ProviderChannel { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -24,13 +25,8 @@ namespace StreamingTvComparison.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
-            //builder.Entity<Channel>()
-            //    .HasIndex(i => i.Name)
-            //    .IsUnique();
-
-            //builder.Entity<Provider>()
-            //    .HasIndex(i => i.Name)
-            //    .IsUnique();
+            builder.Entity<ProviderChannel>()
+                .HasKey(c => new { c.ProviderId, c.ChannelId });
         }
     }
 }

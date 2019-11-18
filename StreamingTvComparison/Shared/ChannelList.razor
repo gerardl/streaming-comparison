@@ -1,0 +1,15 @@
+﻿@using StreamingTvComparison.Models
+@using StreamingTvComparison.Services
+@inject IStreamingService StreamingService
+
+
+<h3>ChannelList</h3>
+
+@code {
+    List<Provider> providers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        providers = await StreamingService.GetProviders();
+    }
+}
