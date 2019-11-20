@@ -205,6 +205,20 @@ namespace StreamingTvComparison.Data
                     IsActive = true,
                     Url = "https://tv.youtube.com/"
                 });
+                context.Provider.Add(new Models.Provider
+                {
+                    Name = "Hulu Live TV",
+                    Price = 44.99m,
+                    IsActive = true,
+                    Url = "https://www.hulu.com/live-tv/"
+                });
+                context.Provider.Add(new Models.Provider
+                {
+                    Name = "FuboTV",
+                    Price = 44.99m,
+                    IsActive = true,
+                    Url = "https://www.fubo.tv/welcome"
+                });
                 context.SaveChanges();
             }
             #endregion

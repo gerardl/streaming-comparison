@@ -40,7 +40,6 @@ namespace StreamingTvComparison
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-            services.AddSingleton<WeatherForecastService>();
 
             // Add custom services
             services.AddTransient<IStreamingService, StreamingService>();

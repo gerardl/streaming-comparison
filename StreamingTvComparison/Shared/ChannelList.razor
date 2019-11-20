@@ -3,7 +3,7 @@
 @inject IStreamingService StreamingService
 
 
-<h3>ChannelList</h3>
+<h3>Channel List</h3>
 
 @if (providers == null || channels == null)
 {
@@ -11,7 +11,11 @@
 }
 else
 {
-    <table class="table">
+    <table class="table"
+        data-toggle="table"
+        data-show-columns="true"
+        data-pagination="true"
+        data-search="true">
         <thead>
             <tr>
                 <th>Channel</th>
