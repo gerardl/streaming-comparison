@@ -1,7 +1,7 @@
 ﻿@using StreamingTvComparison.Models
 @using StreamingTvComparison.Services
-@inject IStreamingService StreamingService
-
+@inject IStreamingService streamingService
+@inject IJSRuntime jsRuntime
 
 <h3>Channel List</h3>
 
@@ -11,11 +11,7 @@
 }
 else
 {
-    <table class="table"
-        data-toggle="table"
-        data-show-columns="true"
-        data-pagination="true"
-        data-search="true">
+    <table id="tblChannels" class="table">
         <thead>
             <tr>
                 <th>Channel</th>
@@ -28,13 +24,13 @@ else
         <tbody>
             @foreach (var channel in channels)
             {
-            <tr>
-                <td>@channel.Name</td>
-                @foreach (var provider in providers)
-                {
-                    <th>@provider.ProviderChannels.Select(s => s.ProviderId).Contains(provider.ProviderId)</th>
-                }
-            </tr>
+                <tr>
+                    <td>@channel.Name</td>
+                    @foreach (var provider in providers)
+                    {
+                        <th>@provider.ProviderChannels.Select(s => s.ProviderId).Contains(provider.ProviderId)</th>
+                    }
+                </tr>
             }
         </tbody>
     </table>
@@ -46,8 +42,13 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        providers = await StreamingService.GetProviders();
-        channels = await StreamingService.GetChannels();
+        providers = await streamingService.GetProviders();
+        channels = await streamingService.GetChannels();
 
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) await jsRuntime.InvokeAsync<object>("setupChannelTable");
     }
 }
