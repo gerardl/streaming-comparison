@@ -194,6 +194,20 @@ namespace StreamingTvComparison.Data
                 context.SaveChanges();
             }
             #endregion
+
+            #region Provider
+            if (!context.Provider.Any())
+            {
+                context.Provider.Add(new Models.Provider
+                {
+                    Name = "YouTube TV",
+                    Price = 49.99m,
+                    IsActive = true,
+                    Url = "https://tv.youtube.com/"
+                });
+                context.SaveChanges();
+            }
+            #endregion
         }
     }
 }

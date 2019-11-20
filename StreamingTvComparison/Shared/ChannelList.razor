@@ -5,11 +5,45 @@
 
 <h3>ChannelList</h3>
 
+@if (providers == null || channels == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Channel</th>
+                @foreach (var provider in providers)
+                {
+                    <th>@provider.Name</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var channel in channels)
+            {
+            <tr>
+                <td>@channel.Name</td>
+                @foreach (var provider in providers)
+                {
+                    <th>@provider.ProviderChannels.Select(s => s.ProviderId).Contains(provider.ProviderId)</th>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
 @code {
     List<Provider> providers;
+    List<Channel> channels;
 
     protected override async Task OnInitializedAsync()
     {
         providers = await StreamingService.GetProviders();
+        channels = await StreamingService.GetChannels();
+
     }
 }
